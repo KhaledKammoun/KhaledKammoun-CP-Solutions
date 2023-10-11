@@ -90,6 +90,9 @@ for i in range(t):
             print()
     else :
         # print the other cases like if "2 2" or "2 4" or "4 2"
+
+        # if n = 2 and m = 50
+        # or if n = 50 and m = 2
         if (n == 2 and m == 2) :
             print("1 0\n0 1")
         elif (n == 2 and m == 4) :
