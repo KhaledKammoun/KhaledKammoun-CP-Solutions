@@ -23,63 +23,63 @@ for i in range(t):
                 if i >= 0 :
                     if dic[(x, i)][0] == 2 :
                         M[x-1][i] = 1
-                        dic[(x-1, i)][1]+=1
+                        dic.get((x-1, i), [0,0])[1]+=1
                     else :
                         M[x-1][i] = 0
-                        dic[(x-1, i)][0]+=1
+                        dic.get((x-1, i), [0,0])[0]+=1
                 if i < n :
                     if dic[(x + var - 1, i)][0] == 2 :
                         M[x+var][i] = 1
-                        dic[(x+var, i)][1]+=1
+                        dic.get((x+var, i), [0,0])[1]+=1
                     else :
                         M[x+var][i] = 0
-                        dic[(x+var, i)][0]+=1
+                        dic.get((x+var, i), [0,0])[0]+=1
                 if j>0 :
                     if dic[(j, y)][0] == 2 :
                         M[j][y-1] = 1
-                        dic[(j, y-1)][1]+=1
+                        dic.get((j, y-1), [0,0])[1]+=1
                     else :
                         M[j][y-1] = 0
-                        dic[(j, y-1)][0]+=1
+                        dic.get((j, y-1), [0,0])[0]+=1
                 if j < m : 
                     if dic[(j, y + var - 1)][0] == 2 :
                         M[j][y + var] = 1
-                        dic[(j, y + var)][1]+=1
+                        dic.get((j, y + var), [0,0])[1]+=1
                     else :
                         M[j][y + var] = 0
-                        dic[(x+var, i)][0]+=1
+                        dic.get((x+var, i), [0,0])[0]+=1
                     
                 i+=1
                 j+=1
                 
             # check the corners
             if dic[(x,y)][1] == 2 :
-                M[x-1,y-1] = 0
-                dic[(x - 1, y - 1)][0]+=1
+                M[x-1][y-1] = 0
+                dic.get((x - 1, y - 1), [0,0])[0]+=1
             else :
-                M[x-1,y-1] = 1
-                dic[(x - 1, y - 1)][1]+=1
+                M[x-1][y-1] = 1
+                dic.get((x - 1, y - 1), [0,0])[1]+=1
             
             if dic[(x,y + var - 1)][1] == 2 :
-                M[x-1,y + var] = 0
-                dic[(x-1,y + var)][0]+=1
+                M[x-1][y + var] = 0
+                dic.get((x-1,y + var), [0,0])[0]+=1
             else :
-                M[x-1,y + var] = 1
-                dic[(x-1,y + var)][1]+=1
+                M[x-1][y + var] = 1
+                dic.get((x-1,y + var), [0,0])[1]+=1
                 
             if dic[(x + var - 1,y)][1] == 2 :
-                M[x + var,y - 1] = 0
-                dic[(x + var,y - 1)][0]+=1
+                M[x + var][y - 1] = 0
+                dic.get((x + var,y - 1), [0,0])[0]+=1
             else :
-                M[x + var,y - 1] = 1
-                dic[(x + var,y - 1)][1]+=1
+                M[x + var][y - 1] = 1
+                dic.get((x + var,y - 1), [0,0])[1]+=1
                 
             if dic[(x + var - 1,y + var - 1)][1] == 2 :
-                M[x + var,y + var] = 0
-                dic[(x + var,y + var)][0]+=1
+                M[x + var][y + var] = 0
+                dic.get((x + var,y + var), [0,0])[0]+=1
             else :
-                M[x + var,y - 1] = 1
-                dic[(x + var,y - 1)][1]+=1
+                M[x + var][y - 1] = 1
+                dic.get((x + var,y - 1), [0,0])[1]+=1
             x-=1
             y-=1        
             var+=2
@@ -89,13 +89,11 @@ for i in range(t):
                 print(M[i][j],end = " ")
             print()
     else :
-        # print the other cases like if "2 2" or "2 4" or "4 2"
-
-        # if n = 2 and m = 50
-        # or if n = 50 and m = 2
+        
         if (n == 2 and m == 2) :
             print("1 0\n0 1")
-        elif (n == 2 and m == 4) :
-            print("1 0 0 1\n0 1 1 0")
-        else :
-            print("0 1\n1 0\n1 0\n0 1")
+        elif (n == 2 and m >= 4) :
+            print((("1 0 0 1 "*(m//4 + m%4))[:m*2 - 1])+"\n"+("0 1 1 0 "*(m//4 + m%4))[:m*2])
+        elif (n>=4 and m == 2) :
+            for c in range(n//2) :
+                print("0 1\n1 0")
