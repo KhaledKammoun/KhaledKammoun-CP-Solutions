@@ -1,28 +1,21 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 using namespace std ;
-
-
 int main(){
-    int t ;
-    cin>>t ;
-    vector<int>v ;
-    unordered_map<int,int> m ;
-    
-    for (int i = 0 ; i<t; i++){
+    int n ;
+    cin>>n ;
+    std::vector<int>v ;
+    for (int i = 0 ; i<n ;i++){
         int x ;
         cin>>x ;
         v.push_back(x) ;
-        m[x]++;
     }
-    int total = 0 ;
-    for (const auto& pair : m) {
-        if (pair.first == 1 || pair.first == 150001)
-            total+=min(pair.second, 2) ;
-        else 
-            total+=min(pair.second, 3) ;
-        if (pair.first > 1 && m[pair.first - 1] >1)
-            total-- ;
+    sort(v.begin(),v.end()) ;
+    int lst = 0, total = 0 ;
+    for (auto &c : v){
+        if (lst > c)
+            n-- ;
+        else
+            lst = max(lst + 1, c - 1) ;
     }
-
-    cout<<total ;
+    cout<<n ;
 }
