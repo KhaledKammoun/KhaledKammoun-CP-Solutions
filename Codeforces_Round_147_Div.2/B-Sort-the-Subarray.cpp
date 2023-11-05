@@ -10,14 +10,27 @@ int main(){
         for (int j = 0 ; j<n ;j++){
             cin>>t[j] ;
         }
-        int x = 1,y = 1 ;
+        vector<pair<int,int>> v ;
+        int x = 1, y = 1, prev_var = 0 ;
         for (int j = 0 ; j<n ;j++){
             int var ;
             cin>>var ;
-            if (t[j]!=var){
-                if (x == 1)
-                    x = j + 1 ;
+            v.push_back(make_pair(x,y)) ;
+            if (var >= prev_var)
                 y = j + 1 ;
+            else {
+                y = j + 1 ;
+                x = j + 1 ;
+            }
+            prev_var = var ;
+        }
+        v.push_back(make_pair(x,y)) ;
+        int max_size = -1; 
+        for (auto c : v){
+            if ((c.second - c.first) > max_size){
+                x = c.first ;
+                y = c.second ;
+                max_size = c.second - c.first ;
             }
         }
         cout<<x<<" "<<y<<endl ;
