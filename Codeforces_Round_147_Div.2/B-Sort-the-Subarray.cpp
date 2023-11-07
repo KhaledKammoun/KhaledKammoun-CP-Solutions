@@ -6,33 +6,46 @@ int main(){
     for (int i = 0 ; i<t ; i++){
         int n ;
         cin>>n ;
-        int t[200001] = {0} ;
         for (int j = 0 ; j<n ;j++){
-            cin>>t[j] ;
+            int x ;
+            cin>>x;
         }
         vector<pair<int,int>> v ;
+        int max_size_1 = -1, max_size_2 = -1; 
+        int x_1 = 1, y_1 = 1,x_2 = 1, y_2 = 1 ;
+        int x_var = -1 ;
         int x = 1, y = 1, prev_var = 0 ;
         for (int j = 0 ; j<n ;j++){
             int var ;
             cin>>var ;
-            v.push_back(make_pair(x,y)) ;
-            if (var >= prev_var)
-                y = j + 1 ;
-            else {
-                y = j + 1 ;
-                x = j + 1 ;
+            if (prev_var != 0){
+                if (var < prev_var){
+                    x = y ;
+                    x_var = var ;
+                }
+                if (((y_1 - x_1) >= max_size_1) && (x_var != var)){
+                    x_1 = x ;
+                    y_1 = y ;
+                    max_size_1 = y_1 - x_1 ;
+                }
+                if (((y_2 - x_2) >= max_size_2) && (x_var == var)){
+                    x_2 = x ;
+                    y_2 = y ;
+                    max_size_2 = y_2 - x_2 ;
+                }
+                
             }
+            else 
+                x_var = var ;
             prev_var = var ;
+            y++ ;
         }
-        v.push_back(make_pair(x,y)) ;
-        int max_size = -1; 
-        for (auto c : v){
-            if ((c.second - c.first) > max_size){
-                x = c.first ;
-                y = c.second ;
-                max_size = c.second - c.first ;
-            }
-        }
-        cout<<x<<" "<<y<<endl ;
+        if (y_1 - x_1 >= y_2 - x_2)
+            cout<<x_1<<" "<<y_1<<endl ;
+        else
+            cout<<x_2<<" "<<y_2<<endl ;
+        
+            
     }
+
 }
