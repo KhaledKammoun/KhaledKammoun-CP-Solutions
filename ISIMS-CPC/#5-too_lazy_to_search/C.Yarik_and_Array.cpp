@@ -6,45 +6,23 @@ int main(){
     cin>>t ;
     while (t--){
         cin>>n ;
-        int neg_count = 0, max_subarray = -1001 ;
-        int tab[200001] = {0} ;
+        int prev_int = 0, curr_int = 0 ;
+        int curr_sum, m ; 
         for (int i = 0 ; i<n ;i++){
-            cin>>tab[i] ;
-            if (tab[i]<=0){
-                neg_count++ ;
+            cin>>curr_int ;
+            if (i == 0){
+                curr_sum = curr_int ;
+                m = curr_int ;
             }
-            max_subarray = max(tab[i], max_subarray) ;
-        }
-        if (neg_count == n){
-            cout<<max_subarray<<endl ;
-        }
-        else{
-            int left = 0, right = 0 ;
-            int current_max = tab[0] ;
-            max_subarray = tab[0] ;
-            while (right < n){
-                if (right +1 < n && abs(tab[right + 1]%2) == abs(tab[right]%2)){
-                    max_subarray = max(max_subarray, current_max) ;
-                    current_max = 0;
-                    left = right + 1 ; // left = right - 1 ;
-                }
-                else{
-                    while (left<=right && tab[left]<=0){
-                        current_max-=tab[left] ;
-                        left++ ;
-                    }
-                }
-                right++ ;
-                current_max+=tab[right] ;
-                max_subarray = max(max_subarray, current_max) ;
+            else{
+                if (abs(prev_int)%2 != abs(curr_int)%2 && curr_sum + curr_int > curr_int)
+                    curr_sum = curr_sum + curr_int ;
+                else
+                    curr_sum = curr_int ;
+                m = max(m, curr_sum) ;
             }
-
-            for (int j = left ; j<right ; j++){
-                
-                current_max-=tab[j] ;
-                max_subarray = max(max_subarray, current_max) ;
-            }
-            cout<<max_subarray<<endl ;
+            prev_int = curr_int ;
         }
+        cout<<m<<endl ;
     }
 }
