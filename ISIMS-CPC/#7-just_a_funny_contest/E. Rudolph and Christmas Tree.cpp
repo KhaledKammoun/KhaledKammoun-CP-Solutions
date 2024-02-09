@@ -15,7 +15,7 @@ int main() {
             cin >> curr_base;
             sum += (0.5 * b * h);
             if (i > 0 && curr_base < prev_base + h) {
-                sum -= (0.5 * b * (h - (curr_base - prev_base)));
+                sum -= (0.5 * (b / h * (prev_base + h - curr_base)) * (prev_base + h - curr_base));
             }
             prev_base = curr_base;
         }
