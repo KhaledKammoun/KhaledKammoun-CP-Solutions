@@ -1,10 +1,7 @@
 #include <bits/stdc++.h>
 #define fast ios_base::sync_with_stdio(false);
-
+ 
 using namespace std ;
-
-
-
 int main(){
     fast ;
     int t ;
@@ -19,7 +16,7 @@ int main(){
             if (i == 0)
                 result = var ;
             else {
-                result^=var ;
+                result&=var ;
             }
         }
         cout<<result<<endl ;
