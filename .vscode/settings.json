@@ -1,5 +1,8 @@
 {
   "files.associations": {
-    "functional": "cpp"
+    "functional": "cpp",
+    "iostream": "cpp",
+    "unordered_set": "cpp",
+    "vector": "cpp"
   }
 }
