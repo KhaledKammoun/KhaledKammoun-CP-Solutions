@@ -3,6 +3,8 @@
     "functional": "cpp",
     "iostream": "cpp",
     "unordered_set": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "random": "cpp",
+    "ratio": "cpp"
   }
 }
