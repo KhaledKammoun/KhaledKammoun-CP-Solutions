@@ -5,6 +5,7 @@
     "unordered_set": "cpp",
     "vector": "cpp",
     "random": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "regex": "cpp"
   }
 }
