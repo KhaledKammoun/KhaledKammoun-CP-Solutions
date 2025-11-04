@@ -6,6 +6,7 @@
     "vector": "cpp",
     "random": "cpp",
     "ratio": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "ostream": "cpp"
   }
 }
