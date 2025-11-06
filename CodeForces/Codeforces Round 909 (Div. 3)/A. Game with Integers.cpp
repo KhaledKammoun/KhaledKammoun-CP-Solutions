@@ -25,12 +25,11 @@ void solve() {
     // vector<int> arr(n);
     // read_vector(arr,n);
 
-    if ((n - 1) % 3 == 0 || (n + 1) % 3 == 0) {
-        cout << "First" << endl;
-    } else {
+    if (n % 3 == 0) {
         cout << "Second" << endl;
+    } else {
+        cout << "First" << endl;
     }
-    return ;
 }
 
 int main() {
