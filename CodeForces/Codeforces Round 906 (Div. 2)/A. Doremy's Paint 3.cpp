@@ -25,23 +25,45 @@ void solve() {
     vector<int> arr(n);
     read_vector(arr,n);
 
-    if (arr[0] != 1) {
-        cout << "NO" << endl;
-        return;
-    }
 
-    vector<int> sorted_arr = arr;
-    sort(all(sorted_arr));
+    unordered_set<int> val;
+    unordered_map<int,int> freq;
 
     f0(i,n) {
-        if (i + 1 != sorted_arr[i]) {
-            cout << "NO" << endl;
-            return;
-        }
+        val.insert(arr[i]);
+        freq[arr[i]]++;
     }
 
-    cout << "YES" << endl;
+    
 
+    if (val.size() == 1) {
+        cout << "Yes" << endl;
+        return;
+    }
+    if (val.size() <= 2) {
+        // Verif if the two numbers have the same frequency
+        bool ok = true;
+        int count_v_1 = 0 ;
+        int count_v_2 = 0 ;
+
+         for (auto it = freq.begin(); it != freq.end(); ++it) {
+            int v = it->second;
+            if (count_v_1 == 0) {
+                count_v_1 = v;
+            } else if (count_v_2 == 0) {
+                count_v_2 = v;
+            } 
+        }
+        if (abs(count_v_1 - count_v_2) > 1) {
+            cout << "No" << endl;
+        } else {
+            cout << "Yes" << endl;
+        }
+
+     
+    } else {
+        cout << "No" << endl;
+    }
 }
 
 int main() {

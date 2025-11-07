@@ -21,27 +21,25 @@ using namespace std;
 #define fmap(k,v,m) for (auto &[k,v] : m)
 
 void solve() {
-    int n; cin >> n;
-    vector<int> arr(n);
-    read_vector(arr,n);
+    int n, m; cin >> n >> m;
+    
+    string x, s ;
 
-    if (arr[0] != 1) {
-        cout << "NO" << endl;
-        return;
+    cin >> x >> s ;
+
+    int nb = 0 ;
+    while (x.length() < s.length()) {
+        x+=x ;
+        nb++ ;
     }
 
-    vector<int> sorted_arr = arr;
-    sort(all(sorted_arr));
-
-    f0(i,n) {
-        if (i + 1 != sorted_arr[i]) {
-            cout << "NO" << endl;
-            return;
-        }
+    if (x.find(s) != string::npos) {
+        cout << nb << endl;
+       } else if ((x + x).find(s) != string::npos) {
+        cout << nb + 1 << endl;
+    } else {
+        cout << -1 << endl;
     }
-
-    cout << "YES" << endl;
-
 }
 
 int main() {
