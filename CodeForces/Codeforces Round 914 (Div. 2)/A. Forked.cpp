@@ -20,53 +20,44 @@ using namespace std;
 #define f1(i,n) for (int i = 1; i <= n; i++)
 #define fmap(k,v,m) for (auto &[k,v] : m)
 
-
-struct PairHash {
-    size_t operator()(const pair<int,int>& p) const noexcept {
-        return (static_cast<size_t>(p.first) << 32) ^ static_cast<size_t>(p.second);
-    }
-};
-
-void addMoves(unordered_set<pair<int,int>, PairHash>& positions,
-              int x, int y, int a, int b)
-{
-    int dx[4] = { a,  a, -a, -a };
-    int dy[4] = { b, -b,  b, -b };
-    int dx2[4] = { b,  b, -b, -b };
-    int dy2[4] = { a, -a,  a, -a };
+void addMoves(set<pair<int,int>>& positions, int x, int y, int a, int b) {
+    int dx[4] = {a, a, -a, -a};
+    int dy[4] = {b, -b, b, -b};
+    int dx2[4] = {b, b, -b, -b};
+    int dy2[4] = {a, -a, a, -a};
 
     for (int i = 0; i < 4; i++) {
-        positions.insert({ x + dx[i],  y + dy[i] });
-        positions.insert({ x + dx2[i], y + dy2[i] });
+        positions.insert({x + dx[i], y + dy[i]});
+        positions.insert({x + dx2[i], y + dy2[i]});
     }
 }
 
-int solve() {
+void solve() {
     int a, b;
     cin >> a >> b;
 
-    int xk, yk;
-    cin >> xk >> yk;
+    int kingX, kingY;
+    cin >> kingX >> kingY;
 
-    int xq, yq;
-    cin >> xq >> yq;
+    int queenX, queenY;
+    cin >> queenX >> queenY;
 
-    unordered_set<pair<int,int>, PairHash> kingPos;
-    unordered_set<pair<int,int>, PairHash> queenPos;
+    set<pair<int,int>> kingMoves;
+    set<pair<int,int>> queenMoves;
 
-    addMoves(kingPos,  xk, yk, a, b);
-    addMoves(queenPos, xq, yq, a, b);
+    addMoves(kingMoves, kingX, kingY, a, b);
+    addMoves(queenMoves, queenX, queenY, a, b);
 
     int shared = 0;
-    for (auto& p : kingPos) {
-        if (queenPos.count(p)) {
+    for (auto& pos : kingMoves) {
+        if (queenMoves.count(pos)) {
             shared++;
         }
     }
 
     cout << shared << "\n";
-    return 0;
 }
+
 
 int main() {
     fast_io;
