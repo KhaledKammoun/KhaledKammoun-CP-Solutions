@@ -16,6 +16,7 @@
     "unordered_map": "cpp",
     "initializer_list": "cpp",
     "valarray": "cpp",
-    "type_traits": "cpp"
+    "type_traits": "cpp",
+    "iosfwd": "cpp"
   }
 }
