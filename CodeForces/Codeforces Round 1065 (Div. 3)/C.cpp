@@ -26,33 +26,30 @@ void solve() {
     vector<int> a(n), b(n);
     read_vector(a,n);
     read_vector(b,n);
-
-    int nb_one_a = 0 ;
-    int nb_one_b = 0 ;
-    for (int i = 0; i < n; i++) {
-        if (i % 2 == 0) { // Ajisai's turn
-          if (a[i] == 0 && b[i] == 1) nb_one_a++;
-          if (a[i] == 1 && b[i] == 0) nb_one_a++;
-          if (a[i] == 1 && b[i] == 1) {
-            nb_one_a++;
-            nb_one_b++;
-          }
-        } else { // Mai's turn
-            if (a[i] == 0 && b[i] == 1) nb_one_b++;
-            if (a[i] == 1 && b[i] == 0) nb_one_b++;
-            if (a[i] == 1 && b[i] == 1) {
-                nb_one_b++;
-                nb_one_a++;
-            }
+    
+    vector<int> diff_indices;
+    f0(i,n) {
+        if (a[i] != b[i]) {
+            diff_indices.pb(i);
         }
     }
 
-    cout << "NB A : " << nb_one_a << " NB B : " << nb_one_b << endl ;
-    
+    int nb_diff = diff_indices.size();
 
-    if (nb_one_a > nb_one_b) cout << "Ajisai" << endl;
-    else if (nb_one_a < nb_one_b) cout << "Mai" << endl;
-    else cout << "Tie" << endl;
+    if (nb_diff % 2 == 0) {
+        cout << "Tie" << endl;
+        return;
+    }
+
+    int last_diff_index = diff_indices.back();
+
+    if (last_diff_index % 2 == 0) {
+        cout << "Ajisai" << endl;
+    } else {
+        cout << "Mai" << endl;
+    }
+
+    
 }
 int main() {
     fast_io;

@@ -21,31 +21,24 @@ using namespace std;
 #define fmap(k,v,m) for (auto &[k,v] : m)
 
 void solve() {
-    long long a, b;
+    ll a, b;
     int n;
     cin >> a >> b >> n;
-    vector<long long> tools(n);
+    vector<ll> tools(n);
     for(int i = 0; i < n; i++) cin >> tools[i];
 
-    sort(tools.rbegin(), tools.rend()); // sort descending
 
-    long long timer = b;
-    long long seconds = 0;
-    int i = 0;
-
-    while (timer > 0) {
-        // Use as many tools as possible to reach max timer a
-        while (i < n && timer < a) {
-            timer += tools[i];
-            if (timer > a) timer = a;
-            i++;
+    ll result = b - 1 ;
+    for(int i = 0; i < n; i++) {
+        ll tool = tools[i];
+        if (tool >= a) {
+            result += a - 1 ;
+        } else {
+            result += tool ;
         }
-        // One second passes
-        timer--;
-        seconds++;
     }
 
-    cout << seconds << "\n";
+    cout << result + 1<< endl;
 }
 
 int main() {
