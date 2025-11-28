@@ -28,6 +28,7 @@ void solve() {
     long long t = (num + den - 1) / den;
     
     cout << t << endl;
+    // IN PYTHON : result = ceil((a - b) * c / b)
 }
 
 int main() {
