@@ -61,9 +61,12 @@ using namespace std;
 
     for (int d = 0; d <= 60; d++) {
         ll div = 1LL << d;
-        ll low = n / div;
+        ll low = n / div; // floor
         ll high = (n + div - 1) / div; // ceil
 
+        // current number = floor + ceil
+        // = low + high
+        
         if (k == low || k == high) {
             cout << d << endl;
             return;
