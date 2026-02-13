@@ -50,14 +50,24 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-bool is_prime(ll n) {
-    if (n <= 1) return false;
-    if (n <= 3) return true;
-    if (n % 2 == 0 || n % 3 == 0) return false;
-    for (ll i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) return false;
+
+// Sieve of Eratosthenes to generate prime numbers up to n
+// Complexity: O(n log log n)
+vector<bool> get_primes(int n) {
+    vector<bool> primes(n + 1, true) ;
+
+    primes[0] = false ;
+    primes[1] = false ;
+
+    for (int p = 2; p * p <= n; p++) {
+        if (primes[p]) {
+            for (int i = p * p; i <= n; i+=p) {
+                primes[i] = false ;
+            }
+        }
     }
-    return true;
+
+    return primes ;
 }
 
 void solve() {
@@ -65,9 +75,12 @@ void solve() {
     vector<ll> arr(n);
     read_vector(arr,n);
 
+    vector<bool> primes = get_primes(1e6);
+
     f0(i, n) {
         ll root = sqrt(arr[i]);
-        if (root * root == arr[i] && root > 1 && is_prime(root)) {
+
+        if (root * root == arr[i] && root > 1  && primes[root]) {
             cout << "YES" << endl;
         } else {
             cout << "NO" << endl;
