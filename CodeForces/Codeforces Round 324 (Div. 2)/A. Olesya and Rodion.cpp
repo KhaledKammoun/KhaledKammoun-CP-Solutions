@@ -51,28 +51,19 @@ using namespace std;
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
 void solve() {
-    int n; cin >> n;
-    // vector<int> arr(n);
-    // read_vector(arr,n);
-    int count = 0;
-    if (n % 2 == 0) {
-        count = n / 2 ;
-        cout << count << endl ;
-        for (int i = 0; i < count ; i++) {
-            cout << 2 << " " ;
+    int n, t; cin >> n >> t;
+    if (t == 10) {
+        if (n == 1) {
+            cout << -1 << endl;
+            return;
+        } else {
+            cout << '1' << string(n - 1, '0') << endl;
+            return;
         }
-        cout << endl ;
-        return ;
     }
-    count = n / 2 ;
-    cout << count << endl ;
-        for (int i = 0; i < count - 1; i++) {
-            cout << 2 << " " ;
-        }
-        cout << 3 << " " ;
-        cout << endl ;
 
-    
+    cout << t << string(n - 1, '0');
+    cout << endl;
 }
 
 int main() {
