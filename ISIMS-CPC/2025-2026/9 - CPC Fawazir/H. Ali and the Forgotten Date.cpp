@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-02-23
+// Date: 2026-02-24
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -51,27 +51,18 @@ using namespace std;
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
 void solve() {
-    // int n; cin >> n;
-    // vector<int> arr(n);
-    // read_vector(arr,n);
+    int n; cin >> n;
+    vector<int> arr(n - 1);
+    read_vector(arr,n - 1);
 
-    int n,m ;
-    cin >> n >> m;
-    vector<ll> a(n);
-    vector<ll> b(m);
+    sort(all(arr)) ;
 
-    read_vector(a,n);
-    sort(all(a));
-
-    read_vector(b,m);
-    
-    for (int i = 0; i < m; i++) {
-        int idx = upper_bound(all(a), b[i]) - a.begin();
-        cout << idx << ' ';
-        
+    for (int i = 1; i <= n; i++) {
+        if (i != arr[i - 1]) {
+            cout << i << endl ;
+            break ;
+        } 
     }
-
-    cout << endl; 
 }
 
 int main() {
