@@ -50,53 +50,40 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-bool is_prime(int n) {
-    if (n <= 1) return false;
-    if (n <= 3) return true;
-    if (n % 2 == 0 || n % 3 == 0) return false;
-    for (int i = 5; i * i <= n; i += 6) {
-        if (n % i == 0 || n % (i + 2) == 0) return false;
-    }
-    return true;
-}
- 
-
 void solve() {
-    int n, m; cin >> n >> m;
-    vector<int> arr(n);
-    read_vector(arr,n);
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n), b(m);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < m; i++) cin >> b[i];
 
-    sort(all(arr)) ;
+    int maxV = n + m;
+    vector<int> freq(maxV + 1, 0);
+    for (int x : a) freq[x]++;
 
-    vector<int> arr2(m);
-    read_vector(arr2,m);
-
-
-    int nb_div = 0;
-
-    for (int i = 0; i < m; i++) {
-        bool can_div = false ;
-        int val = arr2[i] ;
-        if (arr[0] == 1) {
-            nb_div++;
-            continue ;
-        }
-        while (val > 1) {
-         
-            int index = upper_bound(all(arr), val) - arr.begin() ;
-             if (index > 0 && val % arr[index - 1] == 0) {
-                nb_div++;
-                break ;
-            } else if (is_prime(val)) {
-                break ;
-            } else {
-                val/=2 ;
-            }
-
+    vector<int> cntDiv(maxV + 1, 0);
+    for (int d = 1; d <= maxV; d++) {
+        if (freq[d] == 0) continue;
+        for (int multiple = d; multiple <= maxV; multiple += d) {
+            cntDiv[multiple] += freq[d];
         }
     }
-    cout << ((nb_div > (m - nb_div)) ? "Alice" : "Bob") << endl ;
-    
+
+    int div_by_all = 0, div_by_none = 0, div_by_some = 0;
+    for (int y : b) {
+        int c = cntDiv[y];
+        if (c == n) div_by_all++;
+        else if (c == 0) div_by_none++;
+        else div_by_some++;
+    }
+
+    if (div_by_all + (div_by_some % 2) > div_by_none) {
+        cout << "Alice";
+    } else {
+        cout << "Bob";
+    }
+    cout << endl;
+    return ;
 }
 
 int main() {
