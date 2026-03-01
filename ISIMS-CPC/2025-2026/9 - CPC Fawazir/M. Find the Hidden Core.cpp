@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-02-25
+// Date: 2026-03-01
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -51,46 +51,45 @@ using namespace std;
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n), b(m);
-    for (int i = 0; i < n; i++) cin >> a[i];
-    for (int i = 0; i < m; i++) cin >> b[i];
+    // int n; cin >> n;
+    // vector<int> arr(n);
+    // read_vector(arr,n);
 
-    int maxV = n + m;
-    vector<int> freq(maxV + 1, 0);
-    for (int x : a) freq[x]++;
-
-    vector<int> cntDiv(maxV + 1, 0);
-    for (int d = 1; d <= maxV; d++) {
-        if (freq[d] == 0) continue;
-        for (int multiple = d; multiple <= maxV; multiple += d) {
-            cntDiv[multiple] += freq[d];
+    int n, m ; cin >> n >> m;
+    vector<vector<char>> matrix(n, vector<char>(m));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> matrix[i][j];
         }
     }
 
-    int div_by_all = 0, div_by_none = 0, div_by_some = 0;
-    for (int y : b) {
-        int c = cntDiv[y];
-        if (c == n) div_by_all++;
-        else if (c == 0) div_by_none++;
-        else div_by_some++;
+    int x = 0, y = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == 'B') {
+                x = i;
+                y = j;
+                break ;
+            }
+        }
     }
 
-    if (div_by_all + (div_by_some % 2) > div_by_none) {
-        cout << "Alice";
-    } else {
-        cout << "Bob";
-    }
-    cout << endl;
-    return ;
+
+    while (x > 0 && matrix[x-1][y] == 'B') x--;
+    while (y > 0 && matrix[x][y-1] == 'B') y--;
+
+    int lenX = 0, lenY = 0;
+    while (x + lenX < n && matrix[x+lenX][y] == 'B') lenX++;    
+    while (y + lenY < m && matrix[x][y+lenY] == 'B') lenY++;
+
+    cout << x + lenX/2 + 1 << " " << y + lenY/2 + 1 << endl;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
