@@ -101,27 +101,20 @@ void solve() {
     vector<vector<int>> arr(n);
     for (int i = 0 ; i < n ; i++) {
         int l; cin >> l;
-        vector<int> temp;
-        unordered_set<int> seen;
+        vector<int> temp(l);
+        for (int j = 0; j < l; j++) cin >> temp[j];
 
-        for (int j = 0; j < l; j++) {
-            int x; cin >> x;
-            if (seen.count(x) == 0) {
-                temp.push_back(x);
-                seen.insert(x);
+        reverse(temp.begin(), temp.end());
+
+        vector<int> filtered;
+        for (int x : temp) {
+            if (filtered.empty() || filtered.back() != x) {
+                filtered.push_back(x);
             }
         }
 
-        reverse(temp.begin(), temp.end());
-        arr[i] = temp;
+        arr[i] = filtered;
     }
-
-    // cout << "----" << endl ;
-    // for (int i = 0; i < n; i++) {
-    //     cout << "Blog " << i << ": ";
-    //     for (int x : arr[i]) cout << x << " ";
-    //     cout << endl;
-    // }
 
     vector<int> result;
     unordered_map<int,bool> visited_arr;
@@ -130,10 +123,9 @@ void solve() {
 
     while (true) {
         int current_arr_index = getMinArr(arr, visited_arr, visited, ptr);
-        if (current_arr_index == -1) break; // ✅ stop safely
+        if (current_arr_index == -1) break;
 
         visited_arr[current_arr_index] = true;
-        // cout << "Blog : " << current_arr_index << endl;
 
         while (ptr[current_arr_index] < (int)arr[current_arr_index].size()) {
             int num = arr[current_arr_index][ptr[current_arr_index]];
