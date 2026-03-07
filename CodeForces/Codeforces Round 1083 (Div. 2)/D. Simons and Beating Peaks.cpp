@@ -55,63 +55,57 @@ void solve() {
     vector<int> arr(n);
     read_vector(arr,n);
 
-    vector<int> nb_greater_then_current(n, 0);
-
-    for (int i = 1; i < n; i++) {
-        int nb_greater = 0;
-        for (int j = 0; j < i; j++) {
-            if (arr[j] > arr[i]) nb_greater++;
-        }
-        nb_greater_then_current[i] = nb_greater;
-    }
-
-    // cout << "NB GREATER: ";
-    // print_vector(nb_greater_then_current);
-
-    vector<int> asc(n, 0);
-
-    int nb_asc_removed = 0;
-
-    for (int i = 1; i < n; i++) {
-        asc[i] = min(nb_greater_then_current[i], nb_greater_then_current[i-1] + 1);
-        nb_asc_removed = max(nb_asc_removed, asc[i]);
-    }
-
-    vector<int> nb_greater_then_current_from_right(n, 0);
-    for (int i = n - 2; i >= 0; i--) {
-        int nb_greater = 0;
-        for (int j = n - 1; j > i; j--) {
-            if (arr[j] > arr[i]) nb_greater++;
-        }
-        nb_greater_then_current_from_right[i] = nb_greater;
-
-    }
-
-    // cout << "NB GREATER FROM RIGHT: ";
-    // print_vector(nb_greater_then_current_from_right);
-
-    vector<int> desc(n, 0);
-
-    int nb_desc_removed = 0;
-    for (int i = n - 2; i >= 0; i--) {
-        desc[i] = min(nb_greater_then_current_from_right[i], nb_greater_then_current_from_right[i+1] + 1);
-        nb_desc_removed = max(nb_desc_removed, desc[i]);
-    }
-
-    // cout << "NB ASC REMOVED: " << nb_asc_removed << endl;
-    // cout << "NB DESC REMOVED: " << nb_desc_removed << endl;
-
-    // cout << "ASC ARR: ";
-    // print_vector(asc);
-    // cout << "DESC ARR: ";
-    // print_vector(desc);
-
-    int ans = INT_MAX;
+    vector<int> index(n + 1, 0);   // index[value] = position
     for (int i = 0; i < n; i++) {
-        ans = min(ans, nb_asc_removed - asc[i] + nb_desc_removed - desc[i]);
+        index[arr[i]] = i;
     }
 
-    cout << ans << endl;
+    vector<bool> deleted(n, false); // track deleted positions
+    int count = 0;
+
+    for (int val = n; val > 1; val--) {
+        int pos = index[val];
+
+        if (deleted[pos] || pos == 0 || pos == n - 1) continue;
+
+        int left = pos;
+        int right = pos;
+
+        // Move left to nearest non-deleted neighbor
+        while (left - 1 >= 0 && deleted[left - 1]) left--;
+        // Move right to nearest non-deleted neighbor
+        while (right + 1 < n && deleted[right + 1]) right++;
+
+        // If not a peak or out of bounds, skip
+        if (left - 1 < 0 || right + 1 >= n) continue;
+        if (!(arr[pos] > arr[left - 1] && arr[pos] > arr[right + 1])) continue;
+
+        // Keep removing neighbors until it's no longer a peak
+        while (left - 1 >= 0 && right + 1 < n && 
+               arr[pos] > arr[left - 1] && arr[pos] > arr[right + 1]) {
+
+            bool left_better = (left - 2 >= 0 && arr[left] < arr[left - 2]) || left - 2 < 0;
+            bool right_better = (right + 2 < n && arr[right] < arr[right + 2]) || right + 2 >= n;
+
+            if (left_better) {
+                deleted[left - 1] = true;
+                cout << "Removing left neighbor at index " << left - 1 << " with value " << arr[left - 1] << endl;
+            } else if (right_better) {
+                deleted[right + 1] = true;
+                cout << "Removing right neighbor at index " << right + 1 << " with value " << arr[right + 1] << endl;
+            } else {
+                deleted[left - 1] =true;
+                cout << "Removing left neighbor at index " << left - 1 << " with value " << arr[left - 1] << endl;
+            }
+            count++;
+
+            // Update left/right to nearest alive neighbor
+            while (left - 1 >= 0 && deleted[left - 1]) left--;
+            while (right + 1 < n && deleted[right + 1]) right++;
+        }
+    }
+    cout << count << endl;
+    
 }
 
 int main() {
