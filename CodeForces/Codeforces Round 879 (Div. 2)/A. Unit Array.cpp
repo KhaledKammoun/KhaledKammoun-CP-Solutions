@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2025-12-15
+// Date: 2026-03-26
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -55,34 +55,29 @@ void solve() {
     vector<int> arr(n);
     read_vector(arr,n);
 
-    int result = 0 ;
-    int nb_pos = 0;
-    int nb_neg = 0 ;
-
+    int nb_minus_one = 0, nb_one = 0 ;
     for (int i = 0; i < n; i++) {
-        if (arr[i] == 1) nb_pos++;
-        else nb_neg++;
+        if (arr[i] == -1) nb_minus_one++;
+        if (arr[i] == 1) nb_one++;
     }
 
-    if (nb_neg > nb_pos) {
-        int diff = nb_neg - nb_pos - 1;
-        nb_pos += diff ;
-        nb_neg -= diff ;
-        result = diff ;
+    if (nb_one > nb_minus_one) {
+        if (nb_minus_one % 2 != 0) cout << 1 << endl ; 
+        else cout << 0 << endl ;
+    } else {
+        int nb = nb_minus_one -  ((nb_minus_one + nb_one) / 2) ;
+        if ((nb_minus_one - nb) % 2 != 0) cout << nb + 1 << endl ;
+        else cout << nb << endl ;
     }
 
-    if (nb_neg % 2 != 0) {
-        result++;
-    }
-
-    cout << result << endl;
+    return ;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    cin >> t; // uncomment if multiple test cases
+    cin >> t;
     while (t--) {
         solve();
     }
