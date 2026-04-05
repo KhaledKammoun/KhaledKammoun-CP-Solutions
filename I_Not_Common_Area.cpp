@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-02-25
+// Date: 2026-04-02
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -50,50 +50,31 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-int getTotal(string s) {
-    int total = 0 ;
-    for (size_t i = 0; i < s.size(); i++) {
-        total += (s[i] - '0');
-    }
-
-    return total ;
-}
-
 void solve() {
-    string n; cin >> n;
+    // int n; cin >> n;
     // vector<int> arr(n);
     // read_vector(arr,n);
 
-    int result = 0 ;
-    while (getTotal(n) > 9) {
-        int index = 0 ;
-        int max_val = 0;
-        for (int i = 0; i < n.size(); i++) {
-            if (n[i] - '0' >= max_val) {
-                index = i ;
-                max_val = n[i] - '0' ;
-            }
-        }
-
-
-        if (index == 0) {
-            n[0] = '1' ;
-        } else {
-            n[index] = '0' ;
-        }
-        result++;
+    ll a1, b1, a2, b2;
+    cin >> a1 >> b1 >> a2 >> b2;
+    ll max1 = max(a1, b1);
+    ll min1 = min(a1, b1);
+    ll max2 = max(a2, b2);
+    ll min2 = min(a2, b2);
+    if ((max1 >= max2 && min1 >= min2) || (max2 >= max1 && min2 >= min1)) {
+        cout << (a1 * b1 - a2 * b2 >= 0 ? a1 * b1 - a2 * b2 : a2 * b2 - a1 * b1) << endl;
+    } else {
+        cout << -1 << endl;
     }
 
-    cout << result << endl ;
-
-
+    return ; 
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

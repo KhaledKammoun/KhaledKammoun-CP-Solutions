@@ -31,3 +31,11 @@ int main(){
     int t; cin >> t;
     while(t--) solve();
 }
+
+// -------------------------
+// Problem Reflection
+// -------------------------
+// Core Idea (1-2 lines): Make the sequence by multiplying consecutive primes.
+// Why Does This Work?: Each number is different because prime factors are unique.
+// Where Can I Use This Again?: Any problem where you need numbers with unique prime factors or coprime numbers.
+// -------------------------

@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-02-25
+// Date: 2026-04-05
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -50,43 +50,58 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-bool can_make(ll s, ll m, ll n) {
-    ull carry = 0;
-    for (int b = 0; b < 61; b++) {
-        ull sb = (s >> b) & 1LL;
-        ull mb = (m >> b) & 1LL;
-
-        ull avail = mb * (ull)n + carry;
-        if (avail < sb) return false;
-        carry = (avail - sb) >> 1;
-    }
-    return true;
+vector<string> generatePermutations(vector<int> digits) {
+    sort(digits.begin(), digits.end());
+    vector<string> result;
+    do {
+        string s = "";
+        for (int x : digits) s += (char)(x + '0');
+        result.push_back(s);
+    } while(next_permutation(digits.begin(), digits.end()));
+    return result;
 }
-
 void solve() {
-    int t; 
-    cin >> t;
-    while (t--) {
-        ll s, m;
-        cin >> s >> m;
+    string s; cin >> s;
+    int n = s.size();
 
-        ll lo = 1, hi = (ll)1e18, ans = -1;
-        while (lo <= hi) {
-            ll mid = (lo + hi) / 2;
-            if (can_make(s, m, mid)) {
-                ans = mid;
-                hi = mid - 1;
-            } else {
-                lo = mid + 1;
-            }
+    int i, j ; cin >> i >> j;
+
+    int x = 0, y = 0;
+
+    vector<int> digits;
+    for (char c : s) digits.push_back(c - '0');
+    vector<string> allPerms = generatePermutations(digits);
+
+    for (int k = 0; k < n; k++) {
+        if (allPerms[i - 1][k] == allPerms[j - 1][k]) {
+            x++;
+        } else {
+            y++;
         }
-        cout << ans << endl;
     }
+
+    cout << x << "A" << y << "B" << endl;
+
 }
 
 int main() {
     fast_io;
 
-    solve();
+    int t = 1;
+    cin >> t;
+
+    while (t--) {
+        solve();
+    }
+
     return 0;
 }
+
+
+// -------------------------
+// Problem Reflection
+// -------------------------
+// Core Idea (1-2 lines): Generate all permutations of the digits and compare the i-th and j-th permutations to count matches and mismatches.
+// Why Does This Work?: By generating all permutations, we can directly access the i-th and j-th permutations and compare them character by character to count how many digits are in the same position (A) and how many are different (B).
+// Where Can I Use This Again?: This approach can be used in any problem where you need to compare specific permutations of a set of elements, especially when the number of permutations is manageable (like with 4 or 5 digits). It can also be adapted for problems involving combinations or other arrangements where direct access to specific configurations is needed.
+// -------------------------
