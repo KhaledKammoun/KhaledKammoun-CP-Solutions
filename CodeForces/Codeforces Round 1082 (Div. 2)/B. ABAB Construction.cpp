@@ -60,42 +60,25 @@ void solve() {
         return;
     }
 
-    if ((n % 2 == 0 && s[0] == s[1] ) || (n % 2 != 0 && s[0] == 'b')) {
-        cout << "NO "<< endl ;
-        return ;
-    }
-
-
-    if (n > 2) {
-        if (n % 2 != 0 && s[0] == 'a' && s[1] == 'b' && s[2] == 'b') {
-            cout << "NO" << endl;
-            return;
-        }
-        for (int i = 0 ; i < n - 2; i++) {
-            if (s[i] == s[i + 1] && s[i] == s[i + 2]) {
+    if (n % 2 != 0) {
+            if (s[0] != 'a' && s[0] != '?') {
                 cout << "NO" << endl;
                 return;
             }
+    }
+
+    for (int i = (n % 2) == 0 ? 0 : 1; i < n - 1; i += 2) {
+        string sub_str = "";
+        sub_str += s[i];
+        sub_str += s[i + 1];
+        if (sub_str != "ab" && sub_str != "ba" && sub_str != "?b" &&
+            sub_str != "?a" && sub_str != "a?" && sub_str != "b?" && sub_str != "??") {
+            cout << "NO" << endl;
+            return;
         }
     }
 
-    int nbA = 0, nbB = 0, nbUnkown = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == 'a') nbA++;
-        else if (s[i] == 'b') nbB++;
-        else nbUnkown++;
-    }
-
-    int neededA = n / 2 - nbA + (n % 2 == 1 ? 1 : 0) ;
-    int neededB = n / 2 - nbB ;
-
-    if (neededA < 0 || neededB < 0 || neededA + neededB > nbUnkown) {
-        cout << "NO" << endl;
-        return;
-    }
-
-    cout << "YES" << endl;
-
+    cout << "YES" << endl ;
 
 }
 
