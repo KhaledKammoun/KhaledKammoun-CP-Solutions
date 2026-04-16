@@ -53,34 +53,38 @@ using namespace std;
 void solve() {
     int n; cin >> n;
     vector<int> arr(n);
-    read_vector(arr,n);
+    read_vector(arr, n);
 
-    int result = 0;
-    int x = 0;
+    long long result = 0;
     sort(all(arr));
 
-    while (arr.size() > 0) {
-        int index = lower_bound(all(arr), x) - arr.begin() ;
-        if (index == 0) {
-            if (x <= 1) {
-                x++;
-                arr[0]--;
-            }
-        } else {
-                arr[index] -= x ;
-                if (arr[index] < 0) arr[index] = 0 ;
-                x = 0 ;
+    int l = 0, r = n - 1;
+    while (l <= r) {
+        int target = arr[r];
+        long long current_total = 0;
+        while (current_total <= target && l < r) {
+            current_total += arr[l];
+            l++;
         }
 
-        result++;
+        if (current_total > target) {
+            l--;
+            arr[l] = current_total - target;
+            current_total = target;
+        }
 
-
-        arr.erase(remove(all(arr), 0), arr.end());
-
+        if (l == r) {
+            long long S_left = current_total + arr[r];
+            long long type2_kills = min(S_left / 2, (long long)arr[r]);
+            long long uses = (type2_kills > 0) ? 1 : 0;
+            result += (S_left - type2_kills) + uses;
+        } else {
+            result += current_total + 1;
+        }
+        r--;
     }
 
-    cout << result << endl ;
-
+    cout << result << endl;
 }
 
 int main() {
