@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem F — Sfax 2050: The CRNS Quantum Backbone</title>
+  <style>
+    /* Base styles optimized for print with larger text */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 18pt; margin-top: 1em; border-bottom: 2px solid #000; padding-bottom: 5px; }
+    h2 { font-size: 15pt; margin-top: 1.2em; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    h3 { font-size: 13pt; color: #000; font-weight: bold; }
+    
+    code { 
+      background: transparent; 
+      padding: 2px 4px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 12px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 10px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 12px 15px; 
+      margin-bottom: 20px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 15px; 
+      margin: 15px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 15px; padding-left: 25px; }
+    li { margin-bottom: 6px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 12pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 12pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem F — Sfax 2050: The CRNS Quantum Backbone</h1>
+
+  <div class="specs">
+    <div><span>Time Limit:</span> 1.0 s</div>
+    <div><span>Memory Limit:</span> 512 MB</div>
+  </div>
+
+  <div class="story-box">
+    By <strong>2050</strong>, the <strong>CRNS (Centre de Recherche en Numérique de Sfax)</strong> has successfully deployed a city-wide quantum computing grid. This infrastructure is the nervous system of Sfax, consisting of <code>n</code> high-performance nodes and <code>m</code> fiber-optic links.
+  </div>
+
+  <p>
+    An emergency encryption key must be transmitted from the <strong>CRNS Core (Node 1)</strong> located in the Technopole to the <strong>Sfax North Industrial Gateway (Node n)</strong>. 
+  </p>
+
+  <p>
+    The fiber-optic connections are bidirectional. However, there is a catch: <strong>Quantum Decoherence</strong>. Every time the signal enters a new computer node to be routed, the quantum state becomes slightly more unstable. If the signal passes through too many intermediate machines, the encryption key will collapse into noise and become useless.
+  </p>
+
+  <p>
+    To ensure the key arrives intact, the CRNS engineers must find a sequence of nodes that <strong>minimizes the number of hops</strong> the signal takes through the network.
+  </p>
+
+  <p>
+    Your task is to determine if the Gateway is reachable from the CRNS Core and, if it is, identify a valid sequence of nodes that satisfies the signal integrity requirements.
+  </p>
+
+  <h2>Input</h2>
+  <p>
+    The first input line has two integers <code>n</code> and <code>m</code>: the number of nodes in the CRNS network and the number of fiber-optic connections. The nodes are numbered <code>1, 2, ..., n</code>.
+  </p>
+  <p>
+    Then, there are <code>m</code> lines describing the connections. Each line has two integers <code>a</code> and <code>b</code>, signifying a bidirectional link between those two nodes.
+  </p>
+
+  <h2>Output</h2>
+  <p>
+    If it is possible to transmit the key, first print <code>k</code>: the total number of computers the signal resides in during its journey (including the start and end nodes). After this, print the sequence of nodes in the order they are visited.
+  </p>
+  <p>
+    If the signal cannot reach the destination, print <code>IMPOSSIBLE</code>.
+  </p>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li><code>2 &le; n &le; 10<sup>5</sup></code></li>
+    <li><code>1 &le; m &le; 2 &middot; 10<sup>5</sup></code></li>
+    <li><code>1 &le; a, b &le; n</code></li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <span class="section-label">Input</span>
+  <pre>5 5
+1 2
+1 3
+1 4
+2 3
+5 4</pre>
+
+  <span class="section-label">Output</span>
+  <pre>3
+1 4 5</pre>
+
+</body>
+</html>

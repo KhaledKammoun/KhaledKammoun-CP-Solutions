@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem H — The Shinobi Archive</title>
+  <style>
+    /* Base styles optimized for print with larger text */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 18pt; margin-top: 1em; border-bottom: 2px solid #000; padding-bottom: 5px; }
+    h2 { font-size: 15pt; margin-top: 1.2em; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    h3 { font-size: 13pt; color: #000; font-weight: bold; }
+    
+    code { 
+      background: transparent; 
+      padding: 2px 4px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 12px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 10px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 12px 15px; 
+      margin-bottom: 20px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 15px; 
+      margin: 15px 0; 
+      font-style: italic; 
+    }
+
+    .highlight { 
+      font-weight: bold; 
+      /* Removed red color for strict B&W printing */
+    }
+    
+    ul { margin-bottom: 15px; padding-left: 25px; }
+    li { margin-bottom: 6px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 12pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 12pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem H — The Shinobi Archive</h1>
+
+  <div class="specs">
+    <div><span>Time Limit:</span> 1.00 s</div>
+    <div><span>Memory Limit:</span> 512 MB</div>
+  </div>
+
+  <div class="story-box">
+    Within the deepest chambers of the <strong>ISIMS Ninja Clan</strong> headquarters, generations of battle data are encoded onto ancient scrolls. These scrolls contain the power levels of every warrior who has ever defended the institute. During the high-stakes <em>SHINOBI 2.0</em> event, the Grandmasters frequently need to calculate the collective energy of a specific unit of ninjas to deploy them effectively against incoming threats.
+  </div>
+
+  <p>
+    The archive is represented as an array of <code>n</code> integers, where each integer <code>x<sub>i</sub></code> is the energy signature of a shinobi at position <code>i</code>. However, the battlefield is chaotic. You will receive <code>q</code> urgent intelligence requests from the field commanders. Each request defines a range <code>[a, b]</code> and demands the total sum of power levels in that specific section of the archive.
+  </p>
+
+  <p>
+    In a real-world skirmish, speed is the only currency. If your calculation takes too long, the window of opportunity closes. While a novice might try to manually sum the values for every request, a <span class="highlight">True Ninja</span> understands that repeated work is the enemy of efficiency.
+  </p>
+
+  <h2>Input</h2>
+  <p>The first input line contains two integers <code>n</code> and <code>q</code>: the total number of shinobi power levels and the number of intelligence queries to be processed.</p>
+  <p>The second line contains <code>n</code> integers <code>x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub></code>: the individual power level of each ninja in the archive.</p>
+  <p>Finally, the input contains <code>q</code> lines. Each line provides two integers <code>a</code> and <code>b</code> (1-indexed), defining the boundaries of the unit currently under observation.</p>
+
+  <h2>Output</h2>
+  <p>For each query, output a single integer: the total power level of the shinobi unit in the range <code>[a, b]</code>.</p>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li><code>1 &le; n, q &le; 2 &middot; 10<sup>5</sup></code></li>
+    <li><code>1 &le; x<sub>i</sub> &le; 10<sup>9</sup></code></li>
+    <li><code>1 &le; a &le; b &le; n</code></li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <span class="section-label">Input</span>
+  <pre>8 4
+3 2 4 5 1 1 5 3
+2 4
+5 6
+1 8
+3 3</pre>
+
+  <span class="section-label">Output</span>
+  <pre>11
+2
+24
+4</pre>
+
+</body>
+</html>
