@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem D — PROGED Azure Data Stream</title>
+  <style>
+    /* Base styles optimized for print */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.5; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 17pt; margin-top: 0.8em; border-bottom: 2px solid #000; padding-bottom: 4px; }
+    h2 { font-size: 14pt; margin-top: 1em; border-bottom: 1px solid #000; padding-bottom: 2px; margin-bottom: 10px; }
+    h3 { font-size: 12.5pt; color: #000; font-weight: bold; margin-bottom: 8px; }
+    
+    code { 
+      background: transparent; 
+      padding: 1px 3px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 10px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 8px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 10px 15px; 
+      margin-bottom: 15px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 12px 15px; 
+      margin: 12px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 12px; margin-top: 5px; padding-left: 25px; }
+    li { margin-bottom: 4px; }
+    p { margin-bottom: 10px; margin-top: 5px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 12px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 8px; 
+      margin-bottom: 15px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 11.5pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments to force a 2-page fit */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 11.5pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.5in; }
+      h1, h2, h3, .section-label { page-break-after: avoid; }
+      .specs, .story-box, .note-box, pre { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem D — PROGED Azure Data Stream</h1>
+
+  <div class="specs">
+    <div><span>Processing Time:</span> 1.00 s</div>
+    <div><span>Memory Capacity:</span> 512 MB</div>
+  </div>
+
+  <div class="story-box">
+    At <strong>PROGED Solutions</strong>, cloud engineers build high-speed data pipelines using Microsoft Azure. The system processes a continuous stream of data packets, where each packet is tagged with a specific <strong>Data ID</strong>.
+  </div>
+
+  <p>
+    Azure has a strict rule for data quality: A continuous sequence of packets is called a <strong>Clean Batch</strong> only if <em>every single packet inside it has a different Data ID</em>. If any ID repeats within the sequence, the entire batch is rejected.
+  </p>
+
+  <p>
+    As the <strong>Lead Data Engineer</strong>, you are monitoring a stream of <code>n</code> packets. Your task is to calculate the total number of valid "Clean Batches" (subarrays) that can be formed. Remember, every unique pair of starting and ending positions in the stream counts as a distinct valid batch, as long as all IDs inside that range are unique.
+  </p>
+
+  <h2>Input Protocol</h2>
+  <ul>
+    <li>The first line contains an integer <code>n</code>: the total number of data packets.</li>
+    <li>The second line contains <code>n</code> integers <code>k<sub>1</sub>, k<sub>2</sub>, ..., k<sub>n</sub></code>: the Data ID stamped on each packet in the order they arrive.</li>
+  </ul>
+
+  <h2>Output Protocol</h2>
+  <p>Print a single integer: the total number of continuous segments (subarrays) that contain entirely unique Data IDs.</p>
+
+  <h2>Operational Constraints</h2>
+  <ul>
+    <li>The number of packets <code>n</code> can reach up to <code>2 &middot; 10<sup>5</sup></code>.</li>
+    <li>Each Data ID <code>k<sub>i</sub></code> is a value between <code>1</code> and <code>10<sup>9</sup></code>.</li>
+  </ul>
+
+  <h2>Engineer's Example</h2>
+
+  <span class="section-label">Input Data</span>
+  <pre>4
+1 2 1 3</pre>
+
+  <span class="section-label">Engineer's Result</span>
+  <pre>8</pre>
+
+  <h3>Intuition & Observation</h3>
+  <p>Why does the data stream <code>[1, 2, 1, 3]</code> yield exactly <code>8</code> Clean Batches?</p>
+  <ul>
+    <li><strong>Length 1:</strong> <code>[1], [2], [1], [3]</code> (4 valid).</li>
+    <li><strong>Length 2:</strong> <code>[1, 2], [2, 1], [1, 3]</code> (3 valid. Note: <code>[1, 2]</code> and <code>[2, 1]</code> are distinct by their positions).</li>
+    <li><strong>Length 3:</strong> <code>[2, 1, 3]</code> (1 valid. <code>[1, 2, 1]</code> is rejected because ID 1 repeats).</li>
+    <li><strong>Length 4:</strong> <code>[1, 2, 1, 3]</code> (0 valid, rejected because ID 1 repeats).</li>
+  </ul>
+  <p>Total valid batches: <code>4 + 3 + 1 = 8</code>.</p>
+
+  <div class="note-box">
+    <strong>Engineer's Note:</strong> Instead of checking every starting position from scratch, maintain a sliding "safe zone" from left to right. If your current zone contains no duplicates, the number of new valid batches ending at the newly added rightmost packet equals the total number of packets currently inside that safe zone!
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem A — The Piximind Talent Stream Analysis</title>
+  <style>
+    /* Base styles optimized for print with larger text */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; /* Increased base font size */
+    }
+    
+    h1 { font-size: 18pt; margin-top: 1em; border-bottom: 2px solid #000; padding-bottom: 5px; }
+    h2 { font-size: 15pt; margin-top: 1.2em; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    h3 { font-size: 13pt; color: #000; font-weight: bold; }
+    
+    code { 
+      background: transparent; 
+      padding: 2px 4px; 
+      border: 1px solid #000; /* Strict B&W */
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; /* Larger code font */
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 12px; 
+      border-radius: 4px; 
+      font-size: 11pt; /* Larger block code font */
+      border: 1px solid #000; 
+      margin: 10px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 12px 15px; 
+      margin-bottom: 20px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box { 
+      border-left: 4px solid #000; 
+      padding: 15px; 
+      margin: 15px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 15px; padding-left: 25px; }
+    li { margin-bottom: 6px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 12pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 12pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem A — The Piximind Talent Stream Analysis</h1>
+
+  <div class="specs">
+    <div><span>Processing Time:</span> 1.00 s</div>
+    <div><span>Memory Capacity:</span> 512 MB</div>
+  </div>
+
+  <div class="story-box">
+    At <strong>Piximind</strong>, recruitment is viewed through the lens of data science. Every <strong>ISIMS</strong> student who applies is part of a chronological "Talent Stream" that has been recorded since the company's founding. To maintain a culture of innovation, the engineering leads believe in the <strong>"Principle of Cognitive Variety."</strong>
+  </div>
+
+  <p>
+    The principle states that a team’s problem-solving capacity is highest when every member possesses a unique "Logic Signature." In the Piximind database, these signatures are stored as integer <code>Logic IDs</code>. When analyzing the history of <code>n</code> applicants, the HR team wants to identify the most successful period of recruitment—defined as the longest continuous sequence of students where no two individuals shared the same Logic ID.
+  </p>
+
+  <p>
+    As an analyst, you are given the full chronological stream. Your goal is to find the length of the <strong>Longest Variety Batch</strong>. If a student appears in the stream with an ID that has already been seen within the current batch, the "variety" is lost, and the batch must be considered terminated at that point.
+  </p>
+
+  <p>
+    Because Piximind has grown rapidly, the stream contains hundreds of thousands of entries. A slow, manual comparison of every possible batch will be inefficient. You must develop a solution that can process the entire talent stream in a single pass to ensure the data is analyzed before the next recruitment cycle begins.
+  </p>
+
+  <h2>Input Protocol</h2>
+  <ul>
+    <li>The first line contains an integer <code>n</code>: the total number of ISIMS applicants recorded in the Piximind stream.</li>
+    <li>The second line contains <code>n</code> integers <code>k<sub>1</sub>, k<sub>2</sub>, ..., k<sub>n</sub></code>: the Logic ID assigned to each student in the exact order they applied.</li>
+  </ul>
+
+  <h2>Output Protocol</h2>
+  <p>Print a single integer: the maximum length found for a continuous sequence of applicants with unique Logic IDs.</p>
+
+  <h2>Operational Constraints</h2>
+  <ul>
+    <li>The number of students <code>n</code> can reach up to <code>2 &middot; 10<sup>5</sup></code>.</li>
+    <li>Each Logic ID <code>k<sub>i</sub></code> is a value between <code>1</code> and <code>10<sup>9</sup></code>.</li>
+    <li>The system must complete the analysis within <strong>1.00 second</strong>.</li>
+  </ul>
+
+  <h2>Case Study</h2>
+
+  <span class="section-label">Input Data</span>
+  <pre>8
+1 2 1 3 2 7 4 2</pre>
+
+  <span class="section-label">Analysis Result</span>
+  <pre>5</pre>
+
+  <h3>Intuition & Observation</h3>
+  <p>
+    Consider the stream <code>[1, 2, 1, 3, 2, 7, 4, 2]</code>. We track the current batch by observing how it evolves as new students apply:
+  </p>
+  <ul>
+    <li>The stream starts with <code>[1, 2]</code>. Variety is maintained.</li>
+    <li>The next ID is <code>1</code>. This is a duplicate of our first applicant. The current "Unique Batch" starting from index 0 is broken.</li>
+    <li>A new variety batch can be found starting after the first <code>1</code>, leading to the sequence <code>[1, 3, 2, 7, 4]</code>.</li>
+    <li>All IDs in <code>[1, 3, 2, 7, 4]</code> are distinct, giving us a length of <strong>5</strong>.</li>
+    <li>The next ID in the stream is <code>2</code>, which already exists in our current batch, meaning the maximum unique span for this section ends here.</li>
+  </ul>
+
+</body>
+</html>

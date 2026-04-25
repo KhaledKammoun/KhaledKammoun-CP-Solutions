@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem G — Olivesoft's Irreducible Cores</title>
+  <style>
+    /* Base styles optimized for print with larger text */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 18pt; margin-top: 1em; border-bottom: 2px solid #000; padding-bottom: 5px; }
+    h2 { font-size: 15pt; margin-top: 1.2em; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    h3 { font-size: 13pt; color: #000; font-weight: bold; }
+    
+    code { 
+      background: transparent; 
+      padding: 2px 4px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 12px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 10px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 12px 15px; 
+      margin-bottom: 20px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 15px; 
+      margin: 15px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 15px; padding-left: 25px; }
+    li { margin-bottom: 6px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 12pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 12pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem G — Olivesoft's Irreducible Cores</h1>
+
+  <div class="specs">
+    <div><span>Time Limit:</span> 1.00 s</div>
+    <div><span>Memory Limit:</span> 256 MB</div>
+  </div>
+
+  <div class="story-box">
+    <strong>Olivesoft</strong> is stress-testing their new AI data-lake architecture. The pipeline processes <code>n</code> distinct data batches concurrently, where the <code>i</code>-th batch contains exactly <code>a<sub>i</sub></code> data packets.
+  </div>
+
+  <p>
+    During the compression phase, Olivesoft engineers must identify what they call <strong>Irreducible Core</strong> batches. To determine if a batch size <code>x</code> is an Irreducible Core, the system calculates its <strong>Cyclic Resilience Score</strong>, denoted as <code>R(x)</code>.
+  </p>
+
+  <p>
+    The system calculates <code>R(x)</code> by computing the factorial of <code>(x - 1)</code> and finding its remainder when divided by <code>x</code>. Formally:
+  </p>
+  
+  <p style="text-align: center; font-size: 1.2em;">
+    <code>R(x) = (x - 1)! mod x</code>
+  </p>
+
+  <p>
+    Through rigorous testing, Olivesoft defined that a batch size <code>x</code> (where <code>x &gt; 1</code>) is an Irreducible Core <strong>if and only if</strong> its score is exactly equal to <code>x - 1</code>.
+  </p>
+
+  <p>
+    For example, for a batch of size 4: <code>R(4) = 3! mod 4 = 6 mod 4 = 2</code>. Since <code>2 &ne; 3</code>, a batch of 4 is not an Irreducible Core.
+  </p>
+
+  <p>
+    Given the sizes of the <code>n</code> data batches, your task is to write a program that calculates the total number of Irreducible Core batches currently in the pipeline.
+  </p>
+
+  <h2>Input</h2>
+  <p>
+    The first line contains a single integer <code>n</code> — the number of data batches.
+  </p>
+  <p>
+    The second line contains <code>n</code> space-separated integers <code>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></code> — the number of data packets in each batch.
+  </p>
+
+  <h2>Output</h2>
+  <p>
+    Print a single integer — the total number of Irreducible Core batches.
+  </p>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li><code>1 &le; n &le; 10<sup>6</sup></code></li>
+    <li><code>1 &le; a<sub>i</sub> &le; 10<sup>6</sup></code></li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <span class="section-label">Input</span>
+  <pre>10
+2 4 5 6 7 8 9 10 11 1</pre>
+
+  <span class="section-label">Output</span>
+  <pre>4</pre>
+
+  <h2>Note</h2>
+  <p>Let's simulate the Cyclic Resilience Score for a few elements from the example:</p>
+  <ul>
+    <li><code>x = 2</code> &rarr; <code>R(2) = 1! mod 2 = 1</code>. (Score equals <code>2 - 1</code>) &rarr; <strong>Irreducible</strong></li>
+    <li><code>x = 5</code> &rarr; <code>R(5) = 4! mod 5 = 24 mod 5 = 4</code>. (Score equals <code>5 - 1</code>) &rarr; <strong>Irreducible</strong></li>
+    <li><code>x = 6</code> &rarr; <code>R(6) = 5! mod 6 = 120 mod 6 = 0</code>. (Score is <code>0 &ne; 5</code>)</li>
+    <li><code>x = 11</code> &rarr; <code>R(11) = 10! mod 11 = 3628800 mod 11 = 10</code>. (Score equals <code>11 - 1</code>) &rarr; <strong>Irreducible</strong></li>
+    <li><code>x = 1</code> &rarr; Ignored, as Irreducible Cores must be strictly greater than 1.</li>
+  </ul>
+
+</body>
+</html>

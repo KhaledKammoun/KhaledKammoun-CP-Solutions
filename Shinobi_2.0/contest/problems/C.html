@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem C — Operation Carthage: Signal Intercept</title>
+  <style>
+    /* Base styles optimized for print with larger text */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 18pt; margin-top: 1em; border-bottom: 2px solid #000; padding-bottom: 5px; }
+    h2 { font-size: 15pt; margin-top: 1.2em; border-bottom: 1px solid #000; padding-bottom: 3px; }
+    h3 { font-size: 13pt; color: #000; font-weight: bold; }
+    
+    code { 
+      background: transparent; 
+      padding: 2px 4px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 12px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 10px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 12px 15px; 
+      margin-bottom: 20px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 15px; 
+      margin: 15px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 15px; padding-left: 25px; }
+    li { margin-bottom: 6px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    /* Fixed SHINOBI 2.0 Header CSS */
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 10px; 
+      margin-bottom: 20px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 12pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    /* Print specific adjustments */
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 12pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem C — Operation Carthage: Signal Intercept</h1>
+
+  <div class="specs">
+    <div><span>Time Limit:</span> 2.00 s</div>
+    <div><span>Memory Limit:</span> 256 MB</div>
+  </div>
+
+  <div class="story-box">
+    <strong>World War 3</strong> has engulfed the globe. Because of Tunisia's critical strategic position bridging the Mediterranean, Europe, and Africa, the country's airspace has become a massive theater for electronic warfare. The Tunisian Cyber Defense Command has intercepted a raw data stream containing <code>N</code> base radar frequencies used by enemy stealth fleets.
+  </div>
+
+  <p>
+    The enemy's communication protocol encrypts their strike coordinates by combining pairs of these base frequencies. Specifically, a valid target coordinate is formed by adding the values of any two base frequencies transmitted at distinct temporal indices in the array.
+  </p>
+
+  <p>
+    To calibrate the national jamming grid and protect the coastline, the defense engineers at ISIMS need a complete map of the attack matrix. You must find all possible combined frequencies (sums) that can be formed by pairing distinct indices, and determine exactly how many ways each sum can be constructed.
+  </p>
+
+  <p>
+    Two pairs of indices <code>(i, j)</code> and <code>(x, y)</code> are considered identical if they contain the exact same set of indices. Because <code>N</code> is extremely large, a brute-force approach to checking all pairs will not be fast enough to jam the signals in time. 
+  </p>
+
+  <h2>Input</h2>
+  <p>
+    The first line contains a single integer <code>N</code> — the number of intercepted base frequencies.
+  </p>
+  <p>
+    The second line contains <code>N</code> space-separated integers <code>A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>N</sub></code> — the values of the base frequencies.
+  </p>
+
+  <h2>Output</h2>
+  <p>
+    Print multiple lines representing the threat matrix. For every combined frequency <code>S</code> that can be formed by at least one valid pair, print two space-separated integers: the combined frequency <code>S</code> and the number of distinct index pairs <code>(i, j)</code> (where <code>i &lt; j</code>) such that <code>A<sub>i</sub> + A<sub>j</sub> = S</code>.
+  </p>
+  <p>
+    The combined frequencies must be printed in <strong>strictly increasing order</strong>. Do not print frequencies that have a formation count of 0.
+  </p>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li><code>2 &le; N &le; 200,000</code></li>
+    <li><code>0 &le; A<sub>i</sub> &le; 100,000</code></li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <span class="section-label">Input</span>
+  <pre>5
+1 2 3 1 2</pre>
+
+  <span class="section-label">Output</span>
+  <pre>2 1
+3 4
+4 3
+5 2</pre>
+
+  <h2>Note</h2>
+  <p>Let's simulate the combinations for the intercepted frequencies <code>[1, 2, 3, 1, 2]</code>:</p>
+  <ul>
+    <li><strong>Frequency 2:</strong> Can be formed by indices <code>(0, 3)</code> &rarr; <code>1 + 1</code>. (1 way)</li>
+    <li><strong>Frequency 3:</strong> Can be formed by indices <code>(0, 1)</code>, <code>(0, 4)</code>, <code>(1, 3)</code>, <code>(3, 4)</code> &rarr; <code>1 + 2, 1 + 2, 2 + 1, 1 + 2</code>. (4 ways)</li>
+    <li><strong>Frequency 4:</strong> Can be formed by indices <code>(0, 2)</code>, <code>(1, 4)</code>, <code>(2, 3)</code> &rarr; <code>1 + 3, 2 + 2, 3 + 1</code>. (3 ways)</li>
+    <li><strong>Frequency 5:</strong> Can be formed by indices <code>(1, 2)</code>, <code>(2, 4)</code> &rarr; <code>2 + 3, 3 + 2</code>. (2 ways)</li>
+  </ul>
+
+</body>
+</html>

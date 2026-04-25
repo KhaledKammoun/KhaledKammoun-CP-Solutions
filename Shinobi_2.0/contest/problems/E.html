@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Problem E — Kam Anta Kabir ya Bakhano</title>
+  <style>
+    /* Base styles optimized for print */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.5; 
+      margin: 20px auto; 
+      color: #000000; 
+      max-width: 800px; 
+      background-color: #ffffff; 
+      font-size: 12pt; 
+    }
+    
+    h1 { font-size: 17pt; margin-top: 0.8em; border-bottom: 2px solid #000; padding-bottom: 4px; }
+    h2 { font-size: 14pt; margin-top: 1em; border-bottom: 1px solid #000; padding-bottom: 2px; margin-bottom: 10px; }
+    h3 { font-size: 12.5pt; color: #000; font-weight: bold; margin-bottom: 8px; }
+    
+    code { 
+      background: transparent; 
+      padding: 1px 3px; 
+      border: 1px solid #000; 
+      border-radius: 3px; 
+      font-family: "Consolas", monospace; 
+      font-size: 11pt; 
+    }
+    
+    pre { 
+      background: transparent; 
+      color: #000; 
+      padding: 10px; 
+      border-radius: 4px; 
+      font-size: 11pt; 
+      border: 1px solid #000; 
+      margin: 8px 0; 
+      white-space: pre-wrap;
+    }
+
+    .specs { 
+      border: 1px solid #000; 
+      padding: 10px 15px; 
+      margin-bottom: 15px; 
+      display: flex; 
+      gap: 30px; 
+    }
+    .specs span { font-weight: bold; }
+    
+    .story-box, .note-box { 
+      border-left: 4px solid #000; 
+      padding: 12px 15px; 
+      margin: 12px 0; 
+      font-style: italic; 
+    }
+    
+    ul { margin-bottom: 12px; margin-top: 5px; padding-left: 25px; }
+    li { margin-bottom: 4px; }
+    p { margin-bottom: 10px; margin-top: 5px; }
+    
+    .section-label { 
+      font-weight: bold; 
+      margin-top: 12px; 
+      display: block; 
+      text-transform: uppercase; 
+      font-size: 10pt; 
+      letter-spacing: 1px; 
+    }
+
+    .header-entete { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid #000; 
+      padding-bottom: 8px; 
+      margin-bottom: 15px; 
+      font-size: 11pt; 
+      text-transform: uppercase; 
+    }
+    .header-left { flex: 1; text-align: left; }
+    .header-center { flex: 2; text-align: center; font-weight: bold; font-size: 11.5pt; }
+    .header-right { flex: 1; text-align: right; font-weight: bold; }
+
+    @media print {
+      body { margin: 0; max-width: 100%; font-size: 11.5pt; }
+      .header-entete { margin-top: 0; }
+      @page { margin: 0.5in; } 
+      h1, h2, h3, .section-label { page-break-after: avoid; }
+      .specs, .story-box, .note-box, pre { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-entete">
+    <div class="header-left">
+      <strong>SHINOBI 2.0</strong><br>2025/2026
+    </div>
+    <div class="header-center">
+      Higher Institute of Computer Science and Multimedia of Sfax (ISIMS)<br>
+      ISIMS CPC
+    </div>
+    <div class="header-right">
+      12 Avril
+    </div>
+  </div>
+
+  <h1>Problem E — Kam Anta Kabir ya Bakhano</h1>
+
+  <div class="specs">
+    <div><span>Time Limit:</span> 1.00 s</div>
+    <div><span>Memory Limit:</span> 512 MB</div>
+  </div>
+
+  <div class="story-box">
+    Officer Azzouz is chasing the famous sugar addict Bakhano. Bakhano hid his stash in a long row of n warehouses. Each warehouse has a different height.
+  </div>
+
+  <p>
+    Azzouz is looking at a map of the <code>n</code> warehouses from left to right. The warehouses are numbered from <code>1</code> to <code>n</code>. Each warehouse <code>i</code> has a height of <code>x<sub>i</sub></code>.
+  </p>
+
+  <p>
+    To move between the rooftops easily, Azzouz uses a grappling hook. From his current warehouse, he will throw his hook to the <strong>nearest warehouse on his left</strong> that is <strong>strictly shorter</strong> than his current warehouse.
+  </p>
+
+  <p>
+    Your task is to help Azzouz. For every warehouse position, find the index of the nearest shorter warehouse to its left.
+  </p>
+
+  <h2>Input</h2>
+  <p>
+    The first line contains an integer <code>n</code>: the total number of warehouses.
+  </p>
+  <p>
+    The second line contains <code>n</code> integers <code>x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub></code>: the heights of the warehouses from left to right.
+  </p>
+
+  <h2>Output</h2>
+  <p>
+    Print <code>n</code> integers separated by spaces. For each warehouse, print the index of the nearest shorter warehouse to its left. If there is no shorter warehouse to the left, print <code>0</code>.
+  </p>
+
+  <h2>Constraints</h2>
+  <ul>
+    <li><code>1 &le; n &le; 2 &cdot; 10<sup>5</sup></code></li>
+    <li><code>1 &le; x<sub>i</sub> &le; 10<sup>9</sup></code></li>
+  </ul>
+
+  <h2>Example</h2>
+
+  <span class="section-label">Input</span>
+  <pre>8
+2 5 1 4 8 3 2 5</pre>
+  <span class="section-label">Output</span>
+  <pre>0 1 0 3 4 3 3 7 </pre>
+
+  <div class="note-box">
+    <strong>Note:</strong><br>
+    Let's explain the example test case with the heights: <code>2 5 1 4 8 3 2 5</code>.
+    <ul>
+      <li><strong>Warehouse 1</strong> (height 2): No warehouse to the left. Answer is <code>0</code>.</li>
+      <li><strong>Warehouse 2</strong> (height 5): Warehouse 1 (height 2) is shorter. Answer is <code>1</code>.</li>
+      <li><strong>Warehouse 3</strong> (height 1): No shorter warehouse to the left. Answer is <code>0</code>.</li>
+      <li>...</li>
+      <li><strong>Warehouse 6</strong> (height 3): We look to the left. Warehouse 5 (height 8) and Warehouse 4 (height 4) are too tall. Warehouse 3 (height 1) is shorter. Answer is <code>3</code>.</li>
+    </ul>
+  </div>
+
+  <div class="note-box">
+    <strong>Judge Formatting Warning:</strong><br>
+    The grading system uses a strict string comparison. You must print exactly <strong>one space</strong> after every number, including the last one.
+    <ul>
+      <li><strong>For C++:</strong> A standard loop like <code>cout &lt;&lt; ans &lt;&lt; " ";</code> is perfect. Do not try to remove the final space.</li>
+      <li><strong>For Python:</strong> Force the trailing space by using: <code>print(*res, end=" \n")</code>.</li>
+    </ul>
+  </div>
+
+</body>
+</html>
