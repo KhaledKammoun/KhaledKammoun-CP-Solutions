@@ -77,6 +77,7 @@ void solve() {
         } else {
             t_count[t[i]] = 1 ;
             t_unique.push_back(t[i]);
+            
         }
     }
 
