@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-13
+// Date: 2026-02-16
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -51,19 +51,55 @@ using namespace std;
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
 void solve() {
-    int n; cin >> n;
-    vector<int> arr(n);
-    read_vector(arr,n);
+    int n;
+    cin >> n;
+
+    vector<string> path;
+
+    while (n--) {
+        string cmd;
+        cin >> cmd;
+
+        if (cmd == "pwd") {
+            cout << "/";
+            for (const string &dir : path) {
+                cout << dir << "/";
+            }
+            cout << "\n";
+        } 
+        else {
+            string s;
+            cin >> s;
+
+            if (s[0] == '/') {
+                path.clear();
+            }
+
+            string temp;
+            for (int i = 0; i <= s.size(); i++) {
+                if (i == s.size() || s[i] == '/') {
+                    if (!temp.empty()) {
+                        if (temp == "..") {
+                            if (!path.empty()) {
+                                path.pop_back();
+                            }
+                        } else {
+                            path.push_back(temp);
+                        }
+                    }
+                    temp.clear();
+                } else {
+                    temp += s[i];
+                }
+            }
+        }
+    }
 }
 
 int main() {
-    fast_io;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        solve();
-    }
-
+    solve();
     return 0;
 }

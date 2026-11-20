@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-12
+// Date: 2026-03-26
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -52,35 +52,34 @@ using namespace std;
 
 void solve() {
     int n; cin >> n;
-    vector<ll> arr(n);
+    vector<int> arr(n);
     read_vector(arr,n);
 
-    int max_length = 1 ;
-
-    unordered_map<ll, int> counte ;
-    int l = 0 ; 
-    for (int r = 0; r < n ; r++) {
-        if (counte[arr[r]]) {
-            counte[arr[r]]++ ;
-        } else {
-            counte[arr[r]] = 1 ;
-        }
-        while (counte[arr[r]] && counte[arr[r]] > 1 && l <= r) {
-            counte[arr[l]] = max(counte[arr[l]] - 1, 0) ;
-            l++ ;
-        }
-
-        max_length = max(max_length, r - l + 1 ) ;
+    int nb_one = 0, nb_two = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 1) nb_one++;
+        else nb_two++;
     }
 
-    cout << max_length << endl ;
+    int diff = nb_one - (nb_two * 2) ;
+
+    if (diff == 0) cout << "YES";
+    else if (nb_one % 2 != 0) cout << "NO" ;
+    else if (nb_one != 0 && (nb_two * 2 / nb_one )== 2) cout << "YES" ;
+    else if (diff > 0) cout << ( diff % 2 == 0 ? "YES" : "NO") ;
+    else if ((diff / 2) % 2 == 0) cout << "YES" ;
+    else cout << "NO" ;
+
+    cout << endl ;
+
+    return ;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

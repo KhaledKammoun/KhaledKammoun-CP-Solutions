@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-12
+// Date: 2026-11-20
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -50,41 +50,24 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-vector<bool> sieve(int n) {
-    vector<bool> is_prime(n+1, true);
-    is_prime[0] = is_prime[1] = false;
-    for (int i = 2; i * i <= n; i++) {
-        if (is_prime[i]) {
-            for (int j = i * i; j <= n; j += i) {
-                is_prime[j] = false;
-            }
-        }
-    }
-    return is_prime;
-}
-
 void solve() {
-    ll n; cin >> n;
-    vector<ll> arr(n);
-    read_vector(arr,n);
-
-    vector<bool> is_primes = sieve(1e6) ;
-
-
-    int somme = 0 ; 
-    for (int i = 0 ; i< n ; i++) {
-        if (is_primes[arr[i]]) {
-            somme++ ;
-        }
-     }
-
-     cout << somme << endl ;
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    read_vector(arr, n);
+    
+    vector<int> dp(n, 1);
+    int mx = 1 ;
+    for (int i = 1 ; i < n ; i++) {
+        dp[i] += arr[i] >= arr[i - 1] ? dp[i - 1] : 0 ;
+        mx = max(mx, dp[i]);
+    }
+    
+    cout << mx ;
 }
 
 int main() {
     fast_io;
-
-    sieve(200000); 
 
     int t = 1;
     // cin >> t;

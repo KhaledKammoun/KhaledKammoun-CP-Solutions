@@ -5,9 +5,9 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-12
+// Date: 2026-02-26
 // -------------------------------------------------------------------
-
+#include <cmath>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -50,31 +50,28 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
+
 void solve() {
-    int n, q; cin >> n >> q;
-    vector<ll> arr(n);
-    read_vector(arr,n);
+    ll n; 
+    cin >> n;
 
-    vector<ll> prefix(n + 1, 0) ;
-
-    for (int i = 1; i <= n; i++) {
-        prefix[i] = prefix[i - 1] + arr[i - 1] ;
+    ll ans = 1;
+    for (ll p = 2; p * p <= n; p++) {
+        if (n % p == 0) {
+            ans *= p;
+            while (n % p == 0) n /= p;
+        }
     }
+    if (n > 1) ans *= n;
 
-    for (int i = 0 ; i< q; i++) {
-        int a, b ;
-        cin >> a >> b ;
-
-        cout << prefix[b] - prefix[a - 1] <<  endl ;
-        
-    }
+    cout << ans << endl;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

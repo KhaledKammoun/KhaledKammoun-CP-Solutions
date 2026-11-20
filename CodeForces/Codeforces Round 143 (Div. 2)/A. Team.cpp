@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-12
+// Date: 2026-10-28
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -50,68 +50,23 @@ using namespace std;
 #define fvec_char(x,v) for (vector<char>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
-void solve() {
-     int n, m;
-    cin >> n >> m;
-
-    vector<vector<int>> adj(n + 1);
-
-    for (int i = 0; i < m; i++) {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    vector<int> dist(n + 1, -1);
-    vector<int> parent(n + 1, -1);
-    queue<int> q;
-
-    dist[1] = 0;
-    q.push(1);
-
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-
-        for (int v : adj[u]) {
-            if (dist[v] == -1) {
-                dist[v] = dist[u] + 1;
-                parent[v] = u;
-                q.push(v);
-            }
-        }
-    }
-
-
-    if (dist[n] == -1) {
-        cout << "IMPOSSIBLE" << endl;
-        return;
-    }
-
-    vector<int> path;
-    for (int v = n; v != -1; v = parent[v]) {
-        path.push_back(v);
-    }
-
-    reverse(path.begin(), path.end());
-
-    cout << path.size()  << endl;
-    for (int x : path) {
-        cout << x << " ";
-    }
-    cout  << endl;
-
+int solve() {
+    int a, b, c ;
+    cin >> a >> b >> c ;
+    return (a + b + c) > 1 ? 1  : 0;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    // cin >> t;
+    int result = 0 ;
+    cin >> t;
     while (t--) {
-        solve();
+        result += solve();
     }
+
+    cout << result << endl ;
 
     return 0;
 }

@@ -5,7 +5,7 @@
 // #FREE_PALESTINE
 // #STOP_GENOCIDE_IN_GAZA
 // -------------------------------------------------------------------
-// Date: 2026-04-12
+// Date: 2026-10-28
 // -------------------------------------------------------------------
 
 #include <bits/stdc++.h>
@@ -51,18 +51,26 @@ using namespace std;
 #define fvec_string(x,v) for (vector<string>::iterator it = (v).begin(); it != (v).end() && ((x=*it),1); ++it)
 
 void solve() {
-    ll n; cin >> n;
+    // int n; cin >> n;
     // vector<int> arr(n);
     // read_vector(arr,n);
 
-    cout << (n % 2 == 0 ? "Sami" : "Soulaima") << endl;
+    string s ;
+    cin >> s ;
+
+    unordered_set<char> unique_s ;
+    for (auto c : s) {
+        unique_s.insert(c) ;
+    }
+
+    cout << (unique_s.size() % 2 == 0 ? "CHAT WITH HER!" : "IGNORE HIM!") << endl ;
 }
 
 int main() {
     fast_io;
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
